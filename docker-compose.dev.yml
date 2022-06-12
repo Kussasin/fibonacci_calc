@@ -1,0 +1,42 @@
+version: "3"
+services:
+  redis:
+    build: 
+      context: ./redis
+      dockerfile: Dockerfile.dev
+    networks:
+      - backend
+    volumes:
+      - ./data:/data
+    restart: unless-stopped
+  nginx:
+    build:
+      context: ./nginx_local
+      dockerfile: Dockerfile.dev
+    networks:
+      - backend
+    ports:
+      - "80:60"
+    restart: unless-stopped
+  gscal:
+    build:
+      context: ./gscal
+      dockerfile: Dockerfile.dev
+    depends_on:
+      - redis
+      - nginx
+    networks:
+      - backend
+    restart: unless-stopped
+  home:
+    build:
+      context: ./home
+      dockerfile: Dockerfile.dev
+    depends_on:
+      - nginx
+      - gscal
+    networks:
+      - backend
+    restart: unless-stopped
+networks:
+  backend:
