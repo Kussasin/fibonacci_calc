@@ -2,7 +2,7 @@
 
 ## Bohdan Basistyi: TI6.1
 
-#Aby uruchomić kontainer trzeba wpisać:
+### Aby uruchomić kontainer trzeba wpisać:
 `docker compose up`
 
 ![image](https://github.com/Kussasin/fibonacci_calc/blob/main/home/public/diagram.png?raw=true)
